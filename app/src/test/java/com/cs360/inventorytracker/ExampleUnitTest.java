@@ -1,4 +1,4 @@
-package com.zybooks.inventorytracker;
+package com.cs360.inventorytracker;
 
 import org.junit.Test;
 

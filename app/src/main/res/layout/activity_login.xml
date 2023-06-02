@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginVertical="@dimen/activity_vertical_margin"
+    android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+    tools:context="com.cs360.inventorytracker.LoginActivity" >
+
+    <TextView
+        android:id="@+id/login_email_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/login_email_input"
+        android:text="@string/login_email"
+        android:labelFor="@id/login_email_input" />
+
+    <EditText
+        android:id="@+id/login_email_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/login_password_label"
+        android:layout_marginBottom="16dp"
+        android:inputType="textEmailAddress"
+        android:autofillHints="emailAddress" />
+
+    <TextView
+        android:id="@+id/login_password_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/login_password_input"
+        android:text="@string/login_password"
+        android:labelFor="@id/login_password_input" />
+
+    <EditText
+        android:id="@+id/login_password_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="16dp"
+        android:inputType="textPassword"
+        android:autofillHints="password" />
+
+    <Button
+        android:id="@+id/sign_in_button"
+        android:text="@string/sign_in_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login_password_input"
+        android:layout_alignParentEnd="true"
+        style="@style/TextAppearance.App.Button" />
+
+    <RelativeLayout
+        android:id="@+id/textLay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_password_input"
+        android:layout_toStartOf="@+id/sign_in_button"
+        android:layout_marginEnd="20dp" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="center_vertical"
+            android:text="@string/register_account_prompt"
+            android:textSize="@dimen/register_text_size" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_toEndOf="@+id/textView1"
+            android:gravity="center_vertical"
+            android:text="@string/register_account_link"
+            android:textColor="@color/teal_dark"
+            android:textSize="@dimen/register_text_size"
+            android:clickable="true" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

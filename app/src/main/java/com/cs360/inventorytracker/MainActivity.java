@@ -1,7 +1,6 @@
-package com.zybooks.inventorytracker;
+package com.cs360.inventorytracker;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {

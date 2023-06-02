@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--  primary colors  -->
-    <color name="grey_dark">#FF595959</color>
-    <color name="grey_primary_dark">#FF7F7F7F</color>
-    <color name="grey_primary">#FFA5A5A5</color>
+    <color name="grey_primary_dark">#FF595959</color>
+    <color name="grey_primary">#FF7F7F7F</color>
+    <color name="grey">#FFA5A5A5</color>
     <color name="grey_primary_light">#FFCCCCCC</color>
-    <color name="grey_light">#FFF2F2F2</color>
+    <color name="white">#FFFFFFFF</color>
 
     <!--  secondary colors  -->
     <color name="teal_light">#FF00BfB3</color>

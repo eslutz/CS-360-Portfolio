@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.zybooks.inventorytracker'
+    namespace 'com.cs360.inventorytracker'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.zybooks.inventorytracker"
+        applicationId "com.cs360.inventorytracker"
         minSdk 33
         targetSdk 33
         versionCode 1
@@ -25,6 +25,9 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildFeatures {
+        viewBinding true
     }
 }
 

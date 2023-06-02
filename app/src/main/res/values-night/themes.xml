@@ -3,14 +3,15 @@
     <style name="Theme.InventoryTracker" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/grey_primary_light</item>
-        <item name="colorPrimaryVariant">@color/grey_primary_dark</item>
-        <item name="colorOnPrimary">@color/grey_dark</item>
+        <item name="colorPrimaryVariant">@color/grey_primary</item>
+        <item name="colorOnPrimary">@color/grey_primary</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_light</item>
         <item name="colorSecondaryVariant">@color/teal_light</item>
-        <item name="colorOnSecondary">@color/grey_dark</item>
+        <item name="colorOnSecondary">@color/grey_primary</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:textSize">@dimen/text_size</item>
     </style>
 </resources>
