@@ -1,17 +1,17 @@
 <resources>
+    <!--  Sign in  -->
     <string name="app_name">Inventory Tracker</string>
-    <string name="login_email">email</string>
-    <string name="login_password">password</string>
+    <string name="email">email</string>
+    <string name="password">password</string>
     <string name="sign_in_button">sign in</string>
     <string name="register_account_prompt">Need an account?</string>
     <string name="register_account_link">Register here!</string>
-    <string name="title_activity_login2">LoginActivity2</string>
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
+    <!--  Register  -->
+    <string name="register_button">register</string>
+    <string name="confirm_password">confirm password</string>
+    <!--  Invalid login/sign up  -->
+    <string name="invalid_email">Not a valid email</string>
     <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
+    <string name="invalid_password_match">Password must match</string>
+    <string name="app_icon_content_description">box icon</string>
 </resources>
