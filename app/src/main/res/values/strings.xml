@@ -1,12 +1,17 @@
 <resources>
-    <!--  Sign in  -->
+    <!--  Fragment labels  -->
     <string name="app_name">Inventory Tracker</string>
+    <string name="sign_in_fragment_label">Sign in</string>
+    <string name="register_fragment_label">Create an account</string>
+    <string name="inventory_item_fragment_label">Inventory item details</string>
+    <!--  Sign in  -->
     <string name="email">email</string>
     <string name="password">password</string>
     <string name="sign_in_button">sign in</string>
     <string name="register_account_prompt">Need an account?</string>
     <string name="register_account_link">Register here!</string>
     <!--  Register  -->
+    <string name="register_title">Create an account</string>
     <string name="register_button">register</string>
     <string name="confirm_password">confirm password</string>
     <!--  Invalid login/sign up  -->
@@ -14,4 +19,7 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="invalid_password_match">Password must match</string>
     <string name="app_icon_content_description">box icon</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_inventory_fragment">Hello inventory fragment</string>
+    <string name="hello_inventory_item_fragment">Hello inventory item fragment</string>
 </resources>
