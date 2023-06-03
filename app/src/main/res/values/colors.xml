@@ -8,6 +8,9 @@
     <color name="white">#FFFFFFFF</color>
 
     <!--  secondary colors  -->
-    <color name="teal_light">#FF00BfB3</color>
+    <color name="teal_light">#FF00BFB3</color>
     <color name="teal_dark">#FF037971</color>
+
+    <!--  other colors  -->
+    <color name="remove_red">#FF0000</color>
 </resources>

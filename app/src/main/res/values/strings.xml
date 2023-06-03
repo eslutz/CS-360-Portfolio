@@ -19,6 +19,15 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="invalid_password_match">Password must match</string>
     <string name="app_icon_content_description">box icon</string>
+    <!--  Inventory list  -->
+    <string name="add_item_content_description">add new item button</string>
+    <!--  Inventory item details  -->
+    <string name="item_name_label">item</string>
+    <string name="item_qty_label">quantity</string>
+    <string name="item_qty_increase_button">increase item quantity</string>
+    <string name="item_qty_decrease_button">decrease item quantity</string>
+    <string name="item_save">Save</string>
+    <string name="item_remove"><u>Remove</u></string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_inventory_fragment">Hello inventory fragment</string>
     <string name="hello_inventory_item_fragment">Hello inventory item fragment</string>
