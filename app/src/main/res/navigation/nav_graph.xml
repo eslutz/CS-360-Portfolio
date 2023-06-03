@@ -25,7 +25,7 @@
         tools:layout="@layout/fragment_register" >
         <action
             android:id="@id/open_inventory_fragment"
-            app:destination="@+id/fragment_inventory" />
+            app:destination="@+id/fragment_login" />
     </fragment>
 
     <fragment

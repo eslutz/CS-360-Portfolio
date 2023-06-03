@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 public class RegisterFragment extends Fragment {
     @Override
@@ -19,7 +18,7 @@ public class RegisterFragment extends Fragment {
 
         final Button registerButton = rootView.findViewById(R.id.register_button);
         registerButton.setOnClickListener(v -> Navigation.findNavController(registerFragmentContainer)
-                .navigate(R.id.fragment_inventory));
+                .navigate(R.id.fragment_login));
 
         return rootView;
     }

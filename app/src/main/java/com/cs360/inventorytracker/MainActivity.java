@@ -1,30 +1,32 @@
 package com.cs360.inventorytracker;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-
 import android.os.Bundle;
-import android.view.View;
-import android.widget.TextView;
+import java.util.HashSet;
+import java.util.Set;
 
-public class LoginRegisterActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_register);
+        setContentView(R.layout.activity_main);
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.nav_host_fragment);
 
+        Set<Integer> topLevelDestinations = new HashSet<Integer>() {{
+            add(R.id.fragment_login);
+            add(R.id.fragment_inventory);
+        }};
+
         if (navHostFragment != null) {
             NavController navController = navHostFragment.getNavController();
-            AppBarConfiguration appBarConfig = new AppBarConfiguration.
-                    Builder(navController.getGraph()).build();
+            AppBarConfiguration appBarConfig = new AppBarConfiguration.Builder(topLevelDestinations).build();
             NavigationUI.setupActionBarWithNavController(this, navController, appBarConfig);
         }
     }
