@@ -1,6 +1,8 @@
 package com.cs360.inventorytracker;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
@@ -43,6 +45,21 @@ public class InventoryFragment extends Fragment {
             return true;
         });
 
+        // Create SMS notification consent alert
+        AlertDialog.Builder builder = new AlertDialog.Builder(container.getContext());
+        builder.setTitle("Allow SMS notifications?");
+        builder.setMessage("Do you want to receive SMS notifications when an inventory item quantity reaches zero?");
+        builder.setPositiveButton("Yes",
+                (DialogInterface.OnClickListener) (dialog, which) ->
+                setSmsNotification());
+        builder.setNegativeButton("No",
+                (DialogInterface.OnClickListener) (dialog, which) ->
+                dialog.cancel());
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
         return rootView;
     }
+
+    public void setSmsNotification(){}
 }
