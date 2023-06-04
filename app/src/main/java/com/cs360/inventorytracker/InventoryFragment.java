@@ -1,15 +1,19 @@
 package com.cs360.inventorytracker;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 public class InventoryFragment extends Fragment {
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -21,6 +25,23 @@ public class InventoryFragment extends Fragment {
         DividerItemDecoration divider = new DividerItemDecoration(recyclerView.getContext(),
                 DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(divider);
+
+        final ImageView addNewItemButton = rootView.findViewById(R.id.add_new_item);
+        addNewItemButton.setOnClickListener(v -> Navigation.findNavController(rootView).navigate(R.id.fragment_inventory_item));
+        addNewItemButton.setOnTouchListener((v, event) -> {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    addNewItemButton.setColorFilter(R.color.grey_primary_light);
+                    break;
+                case MotionEvent.ACTION_UP:
+                    addNewItemButton.clearColorFilter();
+                    v.performClick();
+                    break;
+                default:
+                    return false;
+            }
+            return true;
+        });
 
         return rootView;
     }

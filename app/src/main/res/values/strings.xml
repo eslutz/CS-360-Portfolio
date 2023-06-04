@@ -9,7 +9,7 @@
     <string name="password">password</string>
     <string name="sign_in_button">sign in</string>
     <string name="register_account_prompt">Need an account?</string>
-    <string name="register_account_link">Register here!</string>
+    <string name="register_account_link">Register!</string>
     <!--  Register  -->
     <string name="register_title">Create an account</string>
     <string name="register_button">register</string>
@@ -20,7 +20,7 @@
     <string name="invalid_password_match">Password must match</string>
     <string name="app_icon_content_description">box icon</string>
     <!--  Inventory list  -->
-    <string name="add_item_content_description">add new item button</string>
+    <string name="add_item_content_description">add new item</string>
     <!--  Inventory item details  -->
     <string name="item_name_label">item</string>
     <string name="item_qty_label">quantity</string>

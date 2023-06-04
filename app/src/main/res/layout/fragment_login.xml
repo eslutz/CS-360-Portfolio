@@ -73,19 +73,19 @@
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_marginEnd="8dp"
-            android:gravity="center_vertical"
             android:text="@string/register_account_prompt"
-            android:textSize="@dimen/register_text_size" />
+            android:textSize="@dimen/register_text_size"
+            android:gravity="top" />
 
         <TextView
             android:id="@+id/register_link"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_toEndOf="@id/register_text"
-            android:gravity="center_vertical"
             android:text="@string/register_account_link"
             android:textColor="@color/teal_dark"
             android:textSize="@dimen/register_text_size"
+            android:gravity="top"
             android:clickable="true" />
 
     </RelativeLayout>

@@ -14,10 +14,8 @@ public class RegisterFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView =  inflater.inflate(R.layout.fragment_register, container, false);
 
-        View registerFragmentContainer = rootView.findViewById(R.id.fragment_register);
-
         final Button registerButton = rootView.findViewById(R.id.register_button);
-        registerButton.setOnClickListener(v -> Navigation.findNavController(registerFragmentContainer)
+        registerButton.setOnClickListener(v -> Navigation.findNavController(rootView)
                 .navigate(R.id.fragment_login));
 
         return rootView;
