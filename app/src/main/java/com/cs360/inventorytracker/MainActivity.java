@@ -2,6 +2,7 @@ package com.cs360.inventorytracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
+import androidx.navigation.NavGraph;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -16,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        UserAccountLocalStore userAccountLocalStore = new UserAccountLocalStore(this);
+
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.nav_host_fragment);
 
@@ -28,6 +31,17 @@ public class MainActivity extends AppCompatActivity {
             NavController navController = navHostFragment.getNavController();
             AppBarConfiguration appBarConfig = new AppBarConfiguration.Builder(topLevelDestinations).build();
             NavigationUI.setupActionBarWithNavController(this, navController, appBarConfig);
+            NavGraph navGraph = navController.getNavInflater().inflate(R.navigation.nav_graph);
+
+            // Check if user is already logged in
+            // If they are then go to inventory fragment
+            // Otherwise go to login fragment
+            if (userAccountLocalStore.getIsUserLoggedIn()) {
+                navGraph.setStartDestination(R.id.fragment_inventory);
+            } else {
+                navGraph.setStartDestination(R.id.fragment_login);
+            }
+            navController.setGraph(navGraph);
         }
     }
 

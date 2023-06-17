@@ -7,20 +7,20 @@
     android:layout_marginBottom="16dp">
 
     <TextView
-        android:id="@+id/inventory_item"
+        android:id="@+id/inventory_item_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        app:layout_constraintEnd_toStartOf="@id/inventory_qty"
+        app:layout_constraintEnd_toStartOf="@id/inventory_item_quantity"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="inventory item" />
 
     <TextView
-        android:id="@+id/inventory_qty"
+        android:id="@+id/inventory_item_quantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/inventory_item"
+        app:layout_constraintStart_toEndOf="@id/inventory_item_name"
         tools:text="qty" />
 
 </LinearLayout>
