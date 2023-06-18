@@ -12,14 +12,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-
-import com.cs360.inventorytracker.model.InventoryItem;
 import com.cs360.inventorytracker.viewmodel.InventoryListViewModel;
-
-import java.util.List;
 
 public class InventoryFragment extends Fragment {
     private RecyclerView mRecyclerView;
@@ -49,15 +43,11 @@ public class InventoryFragment extends Fragment {
             mRecyclerView.setAdapter(mAdapter);
         });
 
-//        List<InventoryItem> inventoryList = inventoryListViewModel.getInventoryList();
-//        mAdapter = new InventoryAdapter(inventoryList);
-//        mRecyclerView.setAdapter(mAdapter);
-
         // Floating button to create a new inventory item
         final ImageView addNewItemButton = rootView.findViewById(R.id.add_new_item);
         addNewItemButton.setOnClickListener(v -> {
             Navigation.findNavController(rootView)
-                    .navigate(R.id.fragment_inventory_item);
+                .navigate(R.id.fragment_inventory_item);
         });
         addNewItemButton.setOnTouchListener((v, event) -> {
             switch (event.getAction()) {

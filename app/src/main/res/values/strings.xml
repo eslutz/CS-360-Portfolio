@@ -3,7 +3,7 @@
     <string name="app_name">Inventory Tracker</string>
     <string name="sign_in_fragment_label">Sign in</string>
     <string name="register_fragment_label">Create an account</string>
-    <string name="inventory_item_fragment_label">Inventory item details</string>
+    <string name="inventory_item_fragment_label">Item details</string>
     <!--  Sign in  -->
     <string name="email">email</string>
     <string name="password">password</string>

@@ -59,15 +59,8 @@ public class InventoryRepo {
     }
 
     public LiveData<InventoryItem> getInventoryItem(Long itemId) {
-        return mInventoryItemDao.getInventoryItem(itemId);
+        return  mInventoryItemDao.getInventoryItem(itemId);
     }
-//    public List<InventoryItem> getInventoryList() {
-//        return mInventoryItemDao.getInventoryList();
-//    }
-//
-//    public InventoryItem getInventoryItem(long itemId) {
-//        return mInventoryItemDao.getInventoryItem(itemId);
-//    }
 
     public long addInventoryItem(InventoryItem item) {
         return mInventoryItemDao.addInventoryItem(item);

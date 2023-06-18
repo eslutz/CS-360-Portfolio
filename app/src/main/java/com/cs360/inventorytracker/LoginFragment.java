@@ -33,7 +33,7 @@ public class LoginFragment extends Fragment {
 
         final TextView registerLink = rootView.findViewById(R.id.register_link);
         registerLink.setOnClickListener(v -> Navigation.findNavController(rootView)
-                .navigate(R.id.fragment_register));
+            .navigate(R.id.fragment_register));
         registerLink.setOnTouchListener((v, event) -> {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
@@ -69,21 +69,21 @@ public class LoginFragment extends Fragment {
                         userAccountLocalStore.setUserLoggedIn(true);
                         // Take user to inventory page
                         Navigation.findNavController(rootView)
-                                .navigate(R.id.fragment_inventory);
+                            .navigate(R.id.fragment_inventory);
                     } else {
                         Toast.makeText(
-                                        rootView.getContext(),
-                                        "The email or password is incorrect",
-                                        Toast.LENGTH_LONG)
-                                .show();
+                            rootView.getContext(),
+                            "The email or password is incorrect",
+                            Toast.LENGTH_LONG)
+                            .show();
                     }
                 });
             } else {
                 Toast.makeText(
-                        rootView.getContext(),
-                        "Email and password cannot be empty",
-                        Toast.LENGTH_LONG)
-                        .show();
+                    rootView.getContext(),
+                    "Email and password cannot be empty",
+                    Toast.LENGTH_LONG)
+                    .show();
             }
         });
 

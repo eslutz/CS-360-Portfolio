@@ -10,17 +10,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
-
 import com.cs360.inventorytracker.model.InventoryItem;
-import com.cs360.inventorytracker.repo.InventoryRepo;
 import com.cs360.inventorytracker.viewmodel.InventoryItemViewModel;
 
 public class InventoryItemFragment extends Fragment {
     public static final String ARG_INVENTORY_ITEM_ID = "inventory_item_id";
+    private InventoryItemViewModel mInventoryItemViewModel;
     private Long mId;
     private String mName;
     private int mQty;
@@ -32,8 +32,6 @@ public class InventoryItemFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        int inventoryItemId = 1;
 
         // Get the inventory item ID from the fragment arguments
         Bundle args = getArguments();
@@ -56,19 +54,28 @@ public class InventoryItemFragment extends Fragment {
         final ImageView increaseQty = rootView.findViewById(R.id.item_qty_increase);
         final Button saveItem = rootView.findViewById(R.id.save_item);
 
+        mInventoryItemViewModel = new ViewModelProvider(this)
+                .get(InventoryItemViewModel.class);
+
         // Inventory item already exists
         if (mId != null) {
             // Get the selected inventory item
-            InventoryRepo.getInstance(requireContext())
-                    .getInventoryItem(mId)
-                    .observe(getViewLifecycleOwner(), inventoryItem -> {
-                        mName = inventoryItem.getName();
-                        itemName.setText(mName);
-                        mQty = inventoryItem.getQuantity();
-                        itemQuantity.setText(mQty);
-                    });
+            mInventoryItemViewModel
+                .getInventoryItem(mId)
+                .observe(getViewLifecycleOwner(), inventoryItem -> {
+                    itemName.setText(inventoryItem.getName());
+                    itemQuantity.setText(String.valueOf(inventoryItem.getQuantity()));
+                });
 
             removeItemLink.setVisibility(View.VISIBLE);
+            removeItemLink.setOnClickListener(v -> {
+                mName = itemName.getText().toString();
+                mQty = Integer.parseInt(itemQuantity.getText().toString());
+                mInventoryItemViewModel.deleteInventoryItem(
+                    new InventoryItem(mName, mQty, mId),
+                    rootView
+                );
+            });
             removeItemLink.setOnTouchListener((v, event) -> {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
@@ -86,12 +93,14 @@ public class InventoryItemFragment extends Fragment {
         } else {
             // Create new inventory item.
             removeItemLink.setVisibility(View.INVISIBLE);
+            itemQuantity.setText(String.valueOf(mQty));
         }
-
 
         decreaseQty.setOnClickListener(v -> {
             mQty = Integer.parseInt(itemQuantity.getText().toString());
-            mQty--;
+            if (mQty > 0) {
+                mQty--;
+            }
             itemQuantity.setText(String.valueOf(mQty));
         });
 
@@ -102,20 +111,28 @@ public class InventoryItemFragment extends Fragment {
         });
 
         saveItem.setOnClickListener(v -> {
-            InventoryItemViewModel inventoryItemViewModel = new ViewModelProvider(this)
-                    .get(InventoryItemViewModel.class);
-
             mName = itemName.getText().toString();
             mQty = Integer.parseInt(itemQuantity.getText().toString());
 
             if (mId != null) {
-                inventoryItemViewModel.updateInventoryItem(new InventoryItem(mName, mQty, mId));
-            } else {
-                inventoryItemViewModel.addInventoryItem(new InventoryItem(mName, mQty, null));
-            }
-
-            Navigation.findNavController(rootView)
+                mInventoryItemViewModel.updateInventoryItem(new InventoryItem(mName, mQty, mId));
+                Navigation.findNavController(rootView)
                     .navigate(R.id.fragment_inventory);
+            } else {
+                if (mName.isEmpty() ) {
+                    Toast.makeText(
+                        rootView.getContext(),
+                        "Item name cannot be empty",
+                        Toast.LENGTH_LONG)
+                        .show();
+                } else {
+                    mInventoryItemViewModel.addInventoryItem(
+                        new InventoryItem(mName, mQty, null)
+                    );
+                    Navigation.findNavController(rootView)
+                        .navigate(R.id.fragment_inventory);
+                }
+            }
         });
 
         return rootView;

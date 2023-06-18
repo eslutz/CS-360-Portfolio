@@ -151,7 +151,7 @@ public class RegisterFragment extends Fragment {
                 // Register the new user
                 if (userAccountViewModel.addUser(newUser)) {
                     Navigation.findNavController(rootView)
-                            .navigate(R.id.fragment_login);
+                        .navigate(R.id.fragment_login);
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(container.getContext());
                     builder.setTitle("Email Unavailable");

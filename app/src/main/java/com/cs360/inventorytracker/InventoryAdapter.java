@@ -1,24 +1,20 @@
 package com.cs360.inventorytracker;
 
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.TextView;
-
+import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.cs360.inventorytracker.model.InventoryItem;
 
 import java.util.List;
 
 public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.ViewHolder> {
-    private static final String TAG = "CustomAdapter";
-
-    private List<InventoryItem> mInventoryList;
+    private final List<InventoryItem> mInventoryList;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView itemNameTextView;
@@ -27,14 +23,15 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
         public ViewHolder(View v) {
             super(v);
             // Define click listener for the ViewHolder's View.
-            v.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Navigation.findNavController(v)
-                            .navigate(R.id.fragment_inventory_item);
+            v.setOnClickListener(v1 -> {
+                Long selectedItemId = (Long) v1.getTag();
+                Bundle args = new Bundle();
+                args.putLong(InventoryItemFragment.ARG_INVENTORY_ITEM_ID, selectedItemId);
 
-                    Log.d(TAG, "Element " + getAdapterPosition() + " clicked.");
-                }
+                Navigation.findNavController(v1)
+                    .navigate(R.id.fragment_inventory_item, args);
+
+                Log.d("ViewHolder","Element " + getAdapterPosition() + " clicked.");
             });
             itemNameTextView = itemView.findViewById(R.id.inventory_item_name);
             itemQuantityTextView = itemView.findViewById(R.id.inventory_item_quantity);
@@ -53,6 +50,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
         mInventoryList = inventoryList;
     }
 
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view.
@@ -68,11 +66,9 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
         viewHolder.getItemQuantityTextView().setText(String.valueOf(mInventoryList.get(position).getQuantity()));
         viewHolder.itemView.setTag(mInventoryList.get(position).getId());
 
-        Log.d(TAG, "Element " + position + " set.");
+        Log.d("BindViewHolder", "Element " + position + " set.");
     }
-    // END_INCLUDE(recyclerViewOnBindViewHolder)
 
-    // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return mInventoryList.size();
