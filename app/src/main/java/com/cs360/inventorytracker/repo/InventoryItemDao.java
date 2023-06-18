@@ -16,10 +16,15 @@ public interface InventoryItemDao {
     LiveData<List<InventoryItem>> getInventoryList();
 
     @Query("SELECT * FROM InventoryItem WHERE id = :id")
-    LiveData<InventoryItem> getInventoryItem(long id);
+    LiveData<InventoryItem> getInventoryItem(Long id);
+//    @Query("SELECT * FROM InventoryItem ORDER BY id")
+//    List<InventoryItem> getInventoryList();
+//
+//    @Query("SELECT * FROM InventoryItem WHERE id = :id")
+//    InventoryItem getInventoryItem(long id);
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    long addInventoryItem(InventoryItem item);
+    Long addInventoryItem(InventoryItem item);
 
     @Update
     void updateInventoryItem(InventoryItem item);

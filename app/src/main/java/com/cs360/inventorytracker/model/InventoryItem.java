@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 public class InventoryItem {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    private long mId;
+    private Long mId;
     @ColumnInfo(name = "name")
     private String mName;
     @ColumnInfo(name = "quantity")
@@ -18,17 +18,20 @@ public class InventoryItem {
     @ColumnInfo(name = "updateTime")
     private long mUpdateTime;
 
-    public InventoryItem(@NotNull String name, int quantity) {
+    public InventoryItem(@NotNull String name, int quantity, Long id) {
+        if (id != null) {
+            this.mId = id;
+        }
         this.mName = name;
         this.mQuantity = quantity;
         this.mUpdateTime = System.currentTimeMillis();
     }
 
-    public long getId() {
+    public Long getId() {
         return mId;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         mId = id;
     }
 

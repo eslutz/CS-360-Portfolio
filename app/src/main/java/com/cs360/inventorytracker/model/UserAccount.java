@@ -10,7 +10,7 @@ import java.util.Locale;
 public class UserAccount {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    private long mId;
+    private Long mId;
     @ColumnInfo(name = "email")
     private String mEmail;
     @ColumnInfo(name = "password")
@@ -28,11 +28,11 @@ public class UserAccount {
         this.mUpdateTime = System.currentTimeMillis();
     }
 
-    public long getId() {
+    public Long getId() {
         return mId;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         mId = id;
     }
 

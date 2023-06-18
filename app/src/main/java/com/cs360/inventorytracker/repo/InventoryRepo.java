@@ -28,7 +28,7 @@ public class InventoryRepo {
                 context,
                 InventoryDatabase.class,
                 DATABASE_NAME)
-                .allowMainThreadQueries()
+                .allowMainThreadQueries()   // todo: remove allow main thread queries
                 .fallbackToDestructiveMigration()
                 .build();
 
@@ -37,12 +37,12 @@ public class InventoryRepo {
     }
 
     // User table
-    public UserAccount getUser(String email) {
+    public LiveData<UserAccount> getUser(String email) {
         return mUserAccountDao.getUser(email);
     }
 
-    public long addUser(UserAccount user) {
-        return mUserAccountDao.addUser(user);
+    public Boolean addUser(UserAccount user) {
+        return mUserAccountDao.addUser(user) != -1;
     }
 
     public void updateUser(UserAccount user) {
@@ -58,9 +58,16 @@ public class InventoryRepo {
         return mInventoryItemDao.getInventoryList();
     }
 
-    public LiveData<InventoryItem> getInventoryItem(long itemId) {
+    public LiveData<InventoryItem> getInventoryItem(Long itemId) {
         return mInventoryItemDao.getInventoryItem(itemId);
     }
+//    public List<InventoryItem> getInventoryList() {
+//        return mInventoryItemDao.getInventoryList();
+//    }
+//
+//    public InventoryItem getInventoryItem(long itemId) {
+//        return mInventoryItemDao.getInventoryItem(itemId);
+//    }
 
     public long addInventoryItem(InventoryItem item) {
         return mInventoryItemDao.addInventoryItem(item);

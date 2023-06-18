@@ -59,24 +59,25 @@ public class LoginFragment extends Fragment {
                 UserAccountViewModel userAccountViewModel = new ViewModelProvider(this)
                         .get(UserAccountViewModel.class);
                 // Attempt to login the user
-                UserAccount user = userAccountViewModel.getUser(email);
-                String loginPassword = generateHash(password, user.getSalt());
-                UserAccount newUser = new UserAccount(email, loginPassword, user.getSalt());
-                // If the user exists and the password matches then login
-                if (user != null && user.getPassword().equals(loginPassword)) {
-                    // Keep the user logged in
-                    userAccountLocalStore.storeUserAccount(newUser);
-                    userAccountLocalStore.setUserLoggedIn(true);
-                    // Take user to inventory page
-                    Navigation.findNavController(rootView)
-                            .navigate(R.id.fragment_inventory);
-                } else {
-                    Toast.makeText(
-                        rootView.getContext(),
-                        "The email or password is incorrect",
-                        Toast.LENGTH_LONG)
-                        .show();
-                }
+                userAccountViewModel.getUser(email).observe(getViewLifecycleOwner(), user -> {
+                    String loginPassword = generateHash(password, user.getSalt());
+                    UserAccount newUser = new UserAccount(email, loginPassword, user.getSalt());
+                    // If the user exists and the password matches then login
+                    if (user.getPassword().equals(loginPassword)) {
+                        // Keep the user logged in
+                        userAccountLocalStore.storeUserAccount(newUser);
+                        userAccountLocalStore.setUserLoggedIn(true);
+                        // Take user to inventory page
+                        Navigation.findNavController(rootView)
+                                .navigate(R.id.fragment_inventory);
+                    } else {
+                        Toast.makeText(
+                                        rootView.getContext(),
+                                        "The email or password is incorrect",
+                                        Toast.LENGTH_LONG)
+                                .show();
+                    }
+                });
             } else {
                 Toast.makeText(
                         rootView.getContext(),

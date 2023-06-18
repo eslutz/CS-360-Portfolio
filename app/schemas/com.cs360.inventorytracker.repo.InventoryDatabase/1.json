@@ -2,17 +2,17 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "57fe0cdb9fe86d0f77046dbc263b6918",
+    "identityHash": "d0b7d5e7cdfb526c209740d8e52b52c2",
     "entities": [
       {
         "tableName": "UserAccount",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `email` TEXT, `password` TEXT, `salt` BLOB, `updateTime` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `email` TEXT, `password` TEXT, `salt` BLOB, `updateTime` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "mId",
             "columnName": "id",
             "affinity": "INTEGER",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "mEmail",
@@ -60,13 +60,13 @@
       },
       {
         "tableName": "InventoryItem",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `quantity` INTEGER NOT NULL, `updateTime` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `name` TEXT, `quantity` INTEGER NOT NULL, `updateTime` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "mId",
             "columnName": "id",
             "affinity": "INTEGER",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "mName",
@@ -100,7 +100,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '57fe0cdb9fe86d0f77046dbc263b6918')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd0b7d5e7cdfb526c209740d8e52b52c2')"
     ]
   }
 }

@@ -25,4 +25,7 @@ public class InventoryListViewModel extends AndroidViewModel {
     public LiveData<List<InventoryItem>> getInventoryList() {
         return mInventoryRepo.getInventoryList();
     }
+//    public List<InventoryItem> getInventoryList() {
+//        return mInventoryRepo.getInventoryList();
+//    }
 }

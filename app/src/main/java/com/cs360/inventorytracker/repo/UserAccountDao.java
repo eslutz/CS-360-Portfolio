@@ -12,7 +12,7 @@ import com.cs360.inventorytracker.model.UserAccount;
 @Dao
 public interface UserAccountDao {
     @Query("SELECT * FROM UserAccount WHERE email = :email")
-    UserAccount getUser(String email);
+    LiveData<UserAccount> getUser(String email);
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     long addUser(UserAccount user);

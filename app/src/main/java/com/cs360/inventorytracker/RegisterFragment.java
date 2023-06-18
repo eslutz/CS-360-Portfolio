@@ -149,8 +149,7 @@ public class RegisterFragment extends Fragment {
                 UserAccount newUser = new UserAccount(email, hashedPassword, newUserSalt);
 
                 // Register the new user
-                long userId = userAccountViewModel.addUser(newUser);
-                if (userId != -1) {
+                if (userAccountViewModel.addUser(newUser)) {
                     Navigation.findNavController(rootView)
                             .navigate(R.id.fragment_login);
                 } else {

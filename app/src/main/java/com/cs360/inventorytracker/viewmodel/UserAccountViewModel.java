@@ -3,6 +3,7 @@ package com.cs360.inventorytracker.viewmodel;
 import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 import com.cs360.inventorytracker.model.UserAccount;
 import com.cs360.inventorytracker.repo.InventoryRepo;
 
@@ -17,11 +18,11 @@ public class UserAccountViewModel extends AndroidViewModel {
         );
     }
 
-    public UserAccount getUser(String email) {
+    public LiveData<UserAccount> getUser(String email) {
         return mInventoryRepo.getUser(email);
     }
 
-    public long addUser(UserAccount user) {
+    public boolean addUser(UserAccount user) {
        return mInventoryRepo.addUser(user);
     }
 
