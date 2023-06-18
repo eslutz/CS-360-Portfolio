@@ -2,7 +2,6 @@ package com.cs360.inventorytracker;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -15,10 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.cs360.inventorytracker.model.InventoryItem;
 import com.cs360.inventorytracker.viewmodel.InventoryListViewModel;
-
 import java.util.List;
 
 public class InventoryFragment extends Fragment {

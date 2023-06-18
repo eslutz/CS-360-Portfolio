@@ -3,7 +3,6 @@ package com.cs360.inventorytracker.viewmodel;
 import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
 import com.cs360.inventorytracker.model.UserAccount;
 import com.cs360.inventorytracker.repo.InventoryRepo;
 

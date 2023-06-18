@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "4167a8b092146973d426acba9f5918b3",
+    "identityHash": "57fe0cdb9fe86d0f77046dbc263b6918",
     "entities": [
       {
         "tableName": "UserAccount",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `email` TEXT, `password` TEXT, `updateTime` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `email` TEXT, `password` TEXT, `salt` BLOB, `updateTime` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "mId",
@@ -24,6 +24,12 @@
             "fieldPath": "mPassword",
             "columnName": "password",
             "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "mSalt",
+            "columnName": "salt",
+            "affinity": "BLOB",
             "notNull": false
           },
           {
@@ -94,7 +100,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4167a8b092146973d426acba9f5918b3')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '57fe0cdb9fe86d0f77046dbc263b6918')"
     ]
   }
 }

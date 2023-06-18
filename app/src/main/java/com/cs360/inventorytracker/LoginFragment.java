@@ -1,5 +1,6 @@
 package com.cs360.inventorytracker;
 
+import static com.cs360.inventorytracker.HashPassword.generateHash;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -59,12 +60,13 @@ public class LoginFragment extends Fragment {
                         .get(UserAccountViewModel.class);
                 // Attempt to login the user
                 UserAccount user = userAccountViewModel.getUser(email);
+                String loginPassword = generateHash(password, user.getSalt());
+                UserAccount newUser = new UserAccount(email, loginPassword, user.getSalt());
                 // If the user exists and the password matches then login
-                if (user != null && user.getPassword().equals(password)) {
+                if (user != null && user.getPassword().equals(loginPassword)) {
                     // Keep the user logged in
-// todo: uncomment keep logged in code
-//                    userAccountLocalStore.storeUserAccount(user);
-//                    userAccountLocalStore.setUserLoggedIn(true);
+                    userAccountLocalStore.storeUserAccount(newUser);
+                    userAccountLocalStore.setUserLoggedIn(true);
                     // Take user to inventory page
                     Navigation.findNavController(rootView)
                             .navigate(R.id.fragment_inventory);

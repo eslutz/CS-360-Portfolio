@@ -2,8 +2,8 @@ package com.cs360.inventorytracker;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-
 import com.cs360.inventorytracker.model.UserAccount;
+import java.util.Arrays;
 
 public class UserAccountLocalStore {
     // Name for the shared preference file
@@ -18,21 +18,22 @@ public class UserAccountLocalStore {
         SharedPreferences.Editor spEditor = userAccountsLocalDatabase.edit();
         spEditor.putString("email", user.getEmail());
         spEditor.putString("password", user.getPassword());
-        spEditor.commit();
+        spEditor.putString("salt", Arrays.toString(user.getSalt()));
+        spEditor.apply();
     }
 
     public UserAccount getLoggedInUser() {
         String email = userAccountsLocalDatabase.getString("email", "");
         String password = userAccountsLocalDatabase.getString("password", "");
+        byte[] salt = userAccountsLocalDatabase.getString("salt", "").getBytes();
 
-        UserAccount storedUser = new UserAccount(email, password);
-        return storedUser;
+        return new UserAccount(email, password, salt);
     }
 
     public void setUserLoggedIn(boolean loggedIn) {
         SharedPreferences.Editor spEditor = userAccountsLocalDatabase.edit();
         spEditor.putBoolean("loggedIn", loggedIn);
-        spEditor.commit();
+        spEditor.apply();
     }
 
     public boolean getIsUserLoggedIn() {
@@ -42,6 +43,6 @@ public class UserAccountLocalStore {
     public void clearUserData() {
         SharedPreferences.Editor spEditor = userAccountsLocalDatabase.edit();
         spEditor.clear();
-        spEditor.commit();
+        spEditor.apply();
     }
 }

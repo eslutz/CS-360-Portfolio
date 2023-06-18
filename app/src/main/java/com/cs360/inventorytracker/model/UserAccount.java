@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
+import java.util.Locale;
 
 @Entity(indices = {@Index(value = {"email"}, unique = true)})
 public class UserAccount {
@@ -14,14 +15,16 @@ public class UserAccount {
     private String mEmail;
     @ColumnInfo(name = "password")
     private String mPassword;
+    @ColumnInfo(name = "salt")
+    private byte[] mSalt;
     @ColumnInfo(name = "updateTime")
     private long mUpdateTime;
 
-    public UserAccount(String email, String password)
+    public UserAccount(String email, String password, byte[] salt)
     {
-        this.mEmail = email;
-        // todo: hash password for storage
+        this.mEmail = email.toLowerCase(Locale.US);
         this.mPassword = password;
+        this.mSalt = salt;
         this.mUpdateTime = System.currentTimeMillis();
     }
 
@@ -47,6 +50,14 @@ public class UserAccount {
 
     public void setPassword(String password) {
         mPassword = password;
+    }
+
+    public byte[] getSalt() {
+        return mSalt;
+    }
+
+    public void setSalt(byte[] salt) {
+        mSalt = salt;
     }
 
     public long getUpdateTime() {

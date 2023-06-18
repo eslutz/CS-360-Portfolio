@@ -1,10 +1,13 @@
 package com.cs360.inventorytracker;
 
+import static com.cs360.inventorytracker.HashPassword.generateHash;
+import static com.cs360.inventorytracker.HashPassword.generateSalt;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Patterns;
@@ -13,12 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-
 import com.cs360.inventorytracker.model.UserAccount;
-import com.cs360.inventorytracker.repo.UserAccountDao;
 import com.cs360.inventorytracker.viewmodel.UserAccountViewModel;
-
 import java.util.regex.Pattern;
 
 public class RegisterFragment extends Fragment {
@@ -141,22 +140,30 @@ public class RegisterFragment extends Fragment {
             String password = mPassword.getText().toString();
 
             if (enableRegisterButton) {
-                // Register the new user
                 UserAccountViewModel userAccountViewModel = new ViewModelProvider(this)
                         .get(UserAccountViewModel.class);
-                UserAccount newUser = new UserAccount(email, password);
+
+                // Hash the password for storage
+                byte[] newUserSalt = generateSalt();
+                String hashedPassword = generateHash(password, newUserSalt);
+                UserAccount newUser = new UserAccount(email, hashedPassword, newUserSalt);
+
+                // Register the new user
                 long userId = userAccountViewModel.addUser(newUser);
                 if (userId != -1) {
                     Navigation.findNavController(rootView)
                             .navigate(R.id.fragment_login);
                 } else {
-                    Toast.makeText(
-                        rootView.getContext(),
-                        "This email is already in use",
-                        Toast.LENGTH_LONG)
-                        .show();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(container.getContext());
+                    builder.setTitle("Email Unavailable");
+                    builder.setMessage("This email address is already in use." +
+                            "  Please try a different one.");
+                    builder.setPositiveButton("Ok",
+                            (DialogInterface.OnClickListener) (dialog, which) ->
+                                    dialog.dismiss());
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
                 }
-
             }
         });
 
