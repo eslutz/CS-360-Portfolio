@@ -26,16 +26,10 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
 
         public ViewHolder(View v) {
             super(v);
-            Animation bounceAnimation = AnimationUtils.loadAnimation(
-                    v.getContext(),
-                    R.anim.bounce
-            );
-
             // Define click listener for the ViewHolder's View.
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    v.startAnimation(bounceAnimation);
                     Navigation.findNavController(v)
                             .navigate(R.id.fragment_inventory_item);
 

@@ -8,10 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import com.cs360.inventorytracker.model.InventoryItem;
 import com.cs360.inventorytracker.repo.InventoryRepo;
@@ -50,12 +52,12 @@ public class InventoryItemFragment extends Fragment {
         final EditText itemName = rootView.findViewById(R.id.item_name_input);
         final EditText itemQuantity = rootView.findViewById(R.id.item_qty_input);
         final TextView removeItemLink = rootView.findViewById(R.id.remove_item_link);
-        final Button decreaseQty = rootView.findViewById(R.id.item_qty_decrease);
-        final Button increaseQty = rootView.findViewById(R.id.item_qty_increase);
+        final ImageView decreaseQty = rootView.findViewById(R.id.item_qty_decrease);
+        final ImageView increaseQty = rootView.findViewById(R.id.item_qty_increase);
         final Button saveItem = rootView.findViewById(R.id.save_item);
 
         // Inventory item already exists
-        if (mId != 0) {
+        if (mId != null) {
             // Get the selected inventory item
             InventoryRepo.getInstance(requireContext())
                     .getInventoryItem(mId)
@@ -83,16 +85,18 @@ public class InventoryItemFragment extends Fragment {
             });
         } else {
             // Create new inventory item.
-            removeItemLink.setVisibility(View.GONE);
+            removeItemLink.setVisibility(View.INVISIBLE);
         }
 
 
         decreaseQty.setOnClickListener(v -> {
+            mQty = Integer.parseInt(itemQuantity.getText().toString());
             mQty--;
             itemQuantity.setText(String.valueOf(mQty));
         });
 
         increaseQty.setOnClickListener(v -> {
+            mQty = Integer.parseInt(itemQuantity.getText().toString());
             mQty++;
             itemQuantity.setText(String.valueOf(mQty));
         });
@@ -101,13 +105,17 @@ public class InventoryItemFragment extends Fragment {
             InventoryItemViewModel inventoryItemViewModel = new ViewModelProvider(this)
                     .get(InventoryItemViewModel.class);
 
-            if (mId != 0) {
+            mName = itemName.getText().toString();
+            mQty = Integer.parseInt(itemQuantity.getText().toString());
+
+            if (mId != null) {
                 inventoryItemViewModel.updateInventoryItem(new InventoryItem(mName, mQty, mId));
             } else {
                 inventoryItemViewModel.addInventoryItem(new InventoryItem(mName, mQty, null));
             }
 
-
+            Navigation.findNavController(rootView)
+                    .navigate(R.id.fragment_inventory);
         });
 
         return rootView;

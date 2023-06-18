@@ -55,12 +55,7 @@ public class InventoryFragment extends Fragment {
 
         // Floating button to create a new inventory item
         final ImageView addNewItemButton = rootView.findViewById(R.id.add_new_item);
-        Animation bounceAnimation = AnimationUtils.loadAnimation(
-                rootView.getContext(),
-                R.anim.bounce
-        );
         addNewItemButton.setOnClickListener(v -> {
-            addNewItemButton.startAnimation(bounceAnimation);
             Navigation.findNavController(rootView)
                     .navigate(R.id.fragment_inventory_item);
         });
