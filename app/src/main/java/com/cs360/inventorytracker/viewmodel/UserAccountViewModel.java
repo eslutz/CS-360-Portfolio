@@ -18,12 +18,12 @@ public class UserAccountViewModel extends AndroidViewModel {
         );
     }
 
-    public LiveData<UserAccount> getUser(String email) {
+    public UserAccount getUser(String email) {
         return mInventoryRepo.getUser(email);
     }
 
-    public void addUser(UserAccount user) {
-        mInventoryRepo.addUser(user);
+    public long addUser(UserAccount user) {
+       return mInventoryRepo.addUser(user);
     }
 
     public void updateUser(UserAccount user) {

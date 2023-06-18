@@ -2,9 +2,10 @@ package com.cs360.inventorytracker.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity
+@Entity(indices = {@Index(value = {"email"}, unique = true)})
 public class UserAccount {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")

@@ -37,12 +37,12 @@ public class InventoryRepo {
     }
 
     // User table
-    public LiveData<UserAccount> getUser(String email) {
+    public UserAccount getUser(String email) {
         return mUserAccountDao.getUser(email);
     }
 
-    public void addUser(UserAccount user) {
-        mUserAccountDao.addUser(user);
+    public long addUser(UserAccount user) {
+        return mUserAccountDao.addUser(user);
     }
 
     public void updateUser(UserAccount user) {
@@ -62,8 +62,8 @@ public class InventoryRepo {
         return mInventoryItemDao.getInventoryItem(itemId);
     }
 
-    public void addInventoryItem(InventoryItem item) {
-        mInventoryItemDao.addInventoryItem(item);
+    public long addInventoryItem(InventoryItem item) {
+        return mInventoryItemDao.addInventoryItem(item);
     }
 
     public void updateInventoryItem(InventoryItem item) {

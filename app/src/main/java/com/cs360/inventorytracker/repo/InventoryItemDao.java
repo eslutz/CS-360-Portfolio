@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 import com.cs360.inventorytracker.model.InventoryItem;
@@ -17,7 +18,7 @@ public interface InventoryItemDao {
     @Query("SELECT * FROM InventoryItem WHERE id = :id")
     LiveData<InventoryItem> getInventoryItem(long id);
 
-    @Insert()
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     long addInventoryItem(InventoryItem item);
 
     @Update

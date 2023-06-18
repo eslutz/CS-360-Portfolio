@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "b0746013d88ab7264e1b6a6c88cb1914",
+    "identityHash": "4167a8b092146973d426acba9f5918b3",
     "entities": [
       {
         "tableName": "UserAccount",
@@ -39,7 +39,17 @@
             "id"
           ]
         },
-        "indices": [],
+        "indices": [
+          {
+            "name": "index_UserAccount_email",
+            "unique": true,
+            "columnNames": [
+              "email"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_UserAccount_email` ON `${TABLE_NAME}` (`email`)"
+          }
+        ],
         "foreignKeys": []
       },
       {
@@ -84,7 +94,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b0746013d88ab7264e1b6a6c88cb1914')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4167a8b092146973d426acba9f5918b3')"
     ]
   }
 }

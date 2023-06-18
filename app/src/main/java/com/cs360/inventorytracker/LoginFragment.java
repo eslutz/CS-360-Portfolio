@@ -3,6 +3,7 @@ package com.cs360.inventorytracker;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -12,8 +13,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.cs360.inventorytracker.model.UserAccount;
+import com.cs360.inventorytracker.viewmodel.UserAccountViewModel;
+import java.util.Locale;
 
 public class LoginFragment extends Fragment {
     private UserAccountLocalStore userAccountLocalStore;
@@ -48,20 +50,31 @@ public class LoginFragment extends Fragment {
 
         final Button signInButton = rootView.findViewById(R.id.sign_in_button);
         signInButton.setOnClickListener(v -> {
-            String email = mEmail.getText().toString();
+            String email = mEmail.getText().toString().toLowerCase(Locale.US);
             String password = mPassword.getText().toString();
 
             // Check that an email and password have been entered
             if (!email.isEmpty() && !password.isEmpty()) {
+                UserAccountViewModel userAccountViewModel = new ViewModelProvider(this)
+                        .get(UserAccountViewModel.class);
                 // Attempt to login the user
-                UserAccount user = new UserAccount(email, password);
-                // todo: check user info against database and display any errors
-
-                // Keep the user logged in
-                userAccountLocalStore.storeUserAccount(user);
-                userAccountLocalStore.setUserLoggedIn(true);
-                Navigation.findNavController(rootView)
-                        .navigate(R.id.fragment_inventory);
+                UserAccount user = userAccountViewModel.getUser(email);
+                // If the user exists and the password matches then login
+                if (user != null && user.getPassword().equals(password)) {
+                    // Keep the user logged in
+// todo: uncomment keep logged in code
+//                    userAccountLocalStore.storeUserAccount(user);
+//                    userAccountLocalStore.setUserLoggedIn(true);
+                    // Take user to inventory page
+                    Navigation.findNavController(rootView)
+                            .navigate(R.id.fragment_inventory);
+                } else {
+                    Toast.makeText(
+                        rootView.getContext(),
+                        "The email or password is incorrect",
+                        Toast.LENGTH_LONG)
+                        .show();
+                }
             } else {
                 Toast.makeText(
                         rootView.getContext(),
@@ -69,9 +82,7 @@ public class LoginFragment extends Fragment {
                         Toast.LENGTH_LONG)
                         .show();
             }
-
         });
-
 
         return rootView;
     }

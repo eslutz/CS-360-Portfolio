@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.cs360.inventorytracker.model.UserAccount;
 import com.cs360.inventorytracker.repo.UserAccountDao;
@@ -144,9 +145,18 @@ public class RegisterFragment extends Fragment {
                 UserAccountViewModel userAccountViewModel = new ViewModelProvider(this)
                         .get(UserAccountViewModel.class);
                 UserAccount newUser = new UserAccount(email, password);
-                userAccountViewModel.addUser(newUser);
-                Navigation.findNavController(rootView)
-                        .navigate(R.id.fragment_login);
+                long userId = userAccountViewModel.addUser(newUser);
+                if (userId != -1) {
+                    Navigation.findNavController(rootView)
+                            .navigate(R.id.fragment_login);
+                } else {
+                    Toast.makeText(
+                        rootView.getContext(),
+                        "This email is already in use",
+                        Toast.LENGTH_LONG)
+                        .show();
+                }
+
             }
         });
 
