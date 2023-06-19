@@ -5,32 +5,32 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import com.cs360.inventorytracker.model.UserAccount;
-import com.cs360.inventorytracker.repo.InventoryRepo;
+import com.cs360.inventorytracker.repo.InventoryRepository;
 
 public class UserAccountViewModel extends AndroidViewModel {
-    private final InventoryRepo mInventoryRepo;
+    private final InventoryRepository mInventoryRepository;
 
     public UserAccountViewModel(@NonNull Application application) {
         super(application);
 
-        mInventoryRepo = InventoryRepo.getInstance(
+        mInventoryRepository = InventoryRepository.getInstance(
                 application.getApplicationContext()
         );
     }
 
     public LiveData<UserAccount> getUser(String email) {
-        return mInventoryRepo.getUser(email);
+        return mInventoryRepository.getUser(email);
     }
 
     public boolean addUser(UserAccount user) {
-       return mInventoryRepo.addUser(user);
+       return mInventoryRepository.addUser(user);
     }
 
     public void updateUser(UserAccount user) {
-        mInventoryRepo.updateUser(user);
+        mInventoryRepository.updateUser(user);
     }
 
     public void deleteUser(UserAccount user) {
-        mInventoryRepo.deleteUser(user);
+        mInventoryRepository.deleteUser(user);
     }
 }

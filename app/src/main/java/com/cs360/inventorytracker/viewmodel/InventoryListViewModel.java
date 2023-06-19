@@ -7,22 +7,22 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.cs360.inventorytracker.model.InventoryItem;
-import com.cs360.inventorytracker.repo.InventoryRepo;
+import com.cs360.inventorytracker.repo.InventoryRepository;
 
 import java.util.List;
 
 public class InventoryListViewModel extends AndroidViewModel {
-    private final InventoryRepo mInventoryRepo;
+    private final InventoryRepository mInventoryRepository;
 
     public InventoryListViewModel(@NonNull Application application) {
         super(application);
 
-        mInventoryRepo = InventoryRepo.getInstance(
+        mInventoryRepository = InventoryRepository.getInstance(
                 application.getApplicationContext()
         );
     }
 
     public LiveData<List<InventoryItem>> getInventoryList() {
-        return mInventoryRepo.getInventoryList();
+        return mInventoryRepository.getInventoryList();
     }
 }

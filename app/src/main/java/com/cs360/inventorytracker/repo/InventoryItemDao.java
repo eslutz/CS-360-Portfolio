@@ -17,18 +17,16 @@ public interface InventoryItemDao {
 
     @Query("SELECT * FROM InventoryItem WHERE id = :id")
     LiveData<InventoryItem> getInventoryItem(Long id);
-//    @Query("SELECT * FROM InventoryItem ORDER BY id")
-//    List<InventoryItem> getInventoryList();
-//
-//    @Query("SELECT * FROM InventoryItem WHERE id = :id")
-//    InventoryItem getInventoryItem(long id);
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    Long addInventoryItem(InventoryItem item);
+    void addInventoryItem(InventoryItem item);
 
     @Update
     void updateInventoryItem(InventoryItem item);
 
     @Delete
     void deleteInventoryItem(InventoryItem item);
+
+    @Query("DELETE FROM InventoryItem WHERE id = :id")
+    void deleteInventoryItemById(Long id);
 }

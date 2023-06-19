@@ -68,14 +68,9 @@ public class InventoryItemFragment extends Fragment {
                 });
 
             removeItemLink.setVisibility(View.VISIBLE);
-            removeItemLink.setOnClickListener(v -> {
-                mName = itemName.getText().toString();
-                mQty = Integer.parseInt(itemQuantity.getText().toString());
-                mInventoryItemViewModel.deleteInventoryItem(
-                    new InventoryItem(mName, mQty, mId),
-                    rootView
-                );
-            });
+            removeItemLink.setOnClickListener(v ->
+                mInventoryItemViewModel.deleteInventoryItemById(mId)
+            );
             removeItemLink.setOnTouchListener((v, event) -> {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
@@ -111,26 +106,32 @@ public class InventoryItemFragment extends Fragment {
         });
 
         saveItem.setOnClickListener(v -> {
-            mName = itemName.getText().toString();
-            mQty = Integer.parseInt(itemQuantity.getText().toString());
-
-            if (mId != null) {
-                mInventoryItemViewModel.updateInventoryItem(new InventoryItem(mName, mQty, mId));
-                Navigation.findNavController(rootView)
-                    .navigate(R.id.fragment_inventory);
+            mName = itemName.getText().toString().trim();
+            String qtyString = itemQuantity.getText().toString();
+            if (qtyString.isEmpty()) {
+                Toast.makeText(
+                    rootView.getContext(),
+                    "Item quantity cannot be empty",
+                    Toast.LENGTH_LONG)
+                    .show();
+            } else if (mName.isEmpty()) {
+                Toast.makeText(
+                    rootView.getContext(),
+                    "Item name cannot be empty",
+                    Toast.LENGTH_LONG)
+                    .show();
             } else {
-                if (mName.isEmpty() ) {
-                    Toast.makeText(
-                        rootView.getContext(),
-                        "Item name cannot be empty",
-                        Toast.LENGTH_LONG)
-                        .show();
+                mQty = Integer.parseInt(qtyString);
+                if (mId != null) {
+                    mInventoryItemViewModel.updateInventoryItem(new InventoryItem(mName, mQty, mId));
+                    Navigation.findNavController(rootView)
+                            .navigate(R.id.fragment_inventory);
                 } else {
                     mInventoryItemViewModel.addInventoryItem(
-                        new InventoryItem(mName, mQty, null)
+                            new InventoryItem(mName, mQty, null)
                     );
                     Navigation.findNavController(rootView)
-                        .navigate(R.id.fragment_inventory);
+                            .navigate(R.id.fragment_inventory);
                 }
             }
         });

@@ -10,41 +10,45 @@ import androidx.navigation.Navigation;
 
 import com.cs360.inventorytracker.R;
 import com.cs360.inventorytracker.model.InventoryItem;
-import com.cs360.inventorytracker.repo.InventoryRepo;
+import com.cs360.inventorytracker.repo.InventoryRepository;
 
 import java.util.concurrent.TimeUnit;
 
 public class InventoryItemViewModel extends AndroidViewModel {
-    private final InventoryRepo mInventoryRepo;
+    private final InventoryRepository mInventoryRepository;
 
     public InventoryItemViewModel(@NonNull Application application) {
         super(application);
 
-        mInventoryRepo = InventoryRepo.getInstance(
+        mInventoryRepository = InventoryRepository.getInstance(
                 application.getApplicationContext()
         );
     }
 
     public LiveData<InventoryItem> getInventoryItem(Long id) {
-        return mInventoryRepo.getInventoryItem(id);
+        return mInventoryRepository.getInventoryItem(id);
     }
 
-    public long addInventoryItem(InventoryItem item) {
-        return mInventoryRepo.addInventoryItem(item);
+    public void addInventoryItem(InventoryItem item) {
+        mInventoryRepository.addInventoryItem(item);
     }
 
     public void updateInventoryItem(InventoryItem item) {
-        mInventoryRepo.updateInventoryItem(item);
+        mInventoryRepository.updateInventoryItem(item);
     }
 
     public void deleteInventoryItem(InventoryItem item, View view) {
-        mInventoryRepo.deleteInventoryItem(item);
+        mInventoryRepository.deleteInventoryItem(item);
         try {
-            TimeUnit.NANOSECONDS.sleep(1);
+            TimeUnit.MILLISECONDS.sleep(1);
         } catch (InterruptedException ie) {
             Thread.currentThread().interrupt();
         }
         Navigation.findNavController(view)
-            .navigate(R.id.fragment_inventory);
+                .navigate(R.id.fragment_inventory);
+    }
+
+    public void deleteInventoryItemById(Long id){
+        mInventoryRepository.deleteInventoryItemById(id);
     }
 }
