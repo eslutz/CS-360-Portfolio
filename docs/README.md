@@ -12,7 +12,7 @@ Once logged in the user sees a list of all items currently in the inventory and 
 
 The register/sign in screen will be the entry point for the app. This is where the user will either create their account or authenticate their access by logging in. After logging in the user will be taken to the main inventory screen. This screen lists all the items currently in the warehouse inventory. There will be a floating button in a fixed location on this screen that the user can click to add a new item. Clicking the add button will take the user to the add/edit item screen with fields for them to fill out. Clicking an item from the inventory list will take the user to the add/edit item screen with the fields pre-populated with the values for the item. When adding or editing an item a save button will be shown to save changes. Clicking the back button will cancel any changes. When editing an item an additional remove button will be displayed as well.  This simple design and layout will allow the user to easily navigate the app and perform the necessary actions.  Because of this the design is successful.
 
-![Inventory mobile app screen flow]()
+![Inventory mobile app screen flow](Project%201%20-%20Option%201%20-%20Inventory%20App%20-%20Wireframe.png)
 
 ## How did you approach the process of coding your app? What techniques or strategies did you use? How could those be applied in the future?
 
